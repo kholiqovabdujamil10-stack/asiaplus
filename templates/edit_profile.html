@@ -1,0 +1,21 @@
+{% extends 'basic.html' %}
+
+{% block content %}
+
+<div class="form-container">
+    <h1 class="form-title">Изменить профиль</h1>
+
+    <form method="POST" class="main-form">
+        {% csrf_token %}
+
+        <label class="form-label">Имя пользователя</label>
+        <input type="text" name="username" value="{{ user.username }}" class="form-input" required>
+
+        <label class="form-label">Email</label>
+        <input type="email" name="email" value="{{ user.email }}" class="form-input">
+
+        <button type="submit" class="submit-button">Сохранить</button>
+    </form>
+</div>
+
+{% endblock %}

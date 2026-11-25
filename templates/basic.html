@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asia-Plus | Новости Таджикистана</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="header-container">
+            <a href="{% url 'home' %}" class="logo">ASIA-PLUS</a>
+
+            <nav class="navigation">
+                <a href="{% url 'home' %}" class="nav-link">Главная</a>
+                <a href="{% url 'search_news' %}" class="nav-link">Новости</a>
+                <a href="{% url 'profile' %}" class="nav-link">Профиль</a>
+            </nav>
+
+            <div class="header-buttons">
+                {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}" class="header-btn">Выйти</a>
+                {% else %}
+                <a href="{% url 'login' %}" class="header-btn">Войти</a>
+                <a href="{% url 'registration' %}" class="header-btn register-btn">Регистрация</a>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    <main class="main-container">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <h2 class="footer-logo">ASIA-PLUS</h2>
+            <p class="footer-text">Новости Таджикистана и мира</p>
+            <p class="copyright">© 2026 Asia-Plus. Все права защищены.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,16 @@
+{% extends 'basic.html' %}
+
+{% block content %}
+
+<div class="confirm-container">
+    <h1 class="confirm-title">Удалить новость?</h1>
+    <p class="confirm-text">Вы действительно хотите удалить новость "{{ news.title }}"?</p>
+
+    <form method="POST" class="confirm-form">
+        {% csrf_token %}
+        <button type="submit" class="delete-button">Да, удалить</button>
+        <a href="{% url 'show_news' %}" class="cancel-button">Отмена</a>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'basic.html' %}
+
+{% block content %}
+
+<div class="comments-container">
+    <h1 class="page-title">Мои комментарии</h1>
+
+    {% for comment in comments %}
+    <div class="comment-card">
+        <p class="comment-text">{{ comment.caption }}</p>
+        <span class="comment-date">{{ comment.created_at }}</span>
+
+        <a href="{% url 'news_detail' comment.news_id.id %}" class="view-button">Открыть новость</a>
+        <a href="{% url 'delete_comment' comment.id %}" class="delete-button">Удалить</a>
+    </div>
+    {% empty %}
+    <p class="empty-message">У вас пока нет комментариев.</p>
+    {% endfor %}
+</div>
+
+{% endblock %}

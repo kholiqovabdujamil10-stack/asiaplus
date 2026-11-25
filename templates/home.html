@@ -1,0 +1,46 @@
+{% extends 'basic.html' %}
+
+{% block content %}
+
+<section class="welcome-section">
+    <h1 class="page-title">Последние новости</h1>
+    <p class="page-description">Главные события Таджикистана и мира</p>
+</section>
+
+<div class="category-list">
+    {% for category in categories %}
+    <a href="{% url 'category_news' category.id %}" class="category-item">
+        {{ category.name }}
+    </a>
+    {% endfor %}
+</div>
+
+<form action="{% url 'search_news' %}" method="GET" class="search-form">
+    <input type="text" name="query" placeholder="Поиск новостей..." class="search-input">
+    <button type="submit" class="search-button">Найти</button>
+</form>
+
+<section class="news-section">
+    <div class="news-grid">
+        {% for item in news %}
+        <article class="news-card">
+            <a href="{% url 'news_detail' item.id %}" class="news-image-link">
+                <img src="{{ item.image.url }}" alt="{{ item.title }}" class="news-image">
+            </a>
+
+            <div class="news-content">
+                <span class="news-category">{{ item.category_id.name }}</span>
+                <h2 class="news-title">
+                    <a href="{% url 'news_detail' item.id %}">{{ item.title }}</a>
+                </h2>
+                <p class="news-description">{{ item.caption|truncatewords:20 }}</p>
+                <span class="news-date">{{ item.created_at }}</span>
+            </div>
+        </article>
+        {% empty %}
+        <p class="empty-message">Пока новостей нет.</p>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}

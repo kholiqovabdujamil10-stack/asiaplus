@@ -1,0 +1,27 @@
+{% extends 'basic.html' %}
+
+{% block content %}
+
+<div class="form-container">
+    <h1 class="form-title">Подтверждение Email</h1>
+
+    <p class="page-description">
+        Мы отправили вам код подтверждения на электронную почту.
+    </p>
+
+    <form method="POST" class="main-form">
+        {% csrf_token %}
+
+        <label class="form-label">Имя пользователя</label>
+        <input type="text" name="username" class="form-input" required>
+
+        <label class="form-label">Код подтверждения</label>
+        <input type="text" name="code" maxlength="6" class="form-input" required>
+
+        <button type="submit" class="submit-button">
+            Подтвердить Email
+        </button>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'basic.html' %}
+
+{% block content %}
+
+<div class="confirm-container">
+    <h1 class="confirm-title">Удалить комментарий?</h1>
+    <p class="confirm-text">{{ comment.caption }}</p>
+
+    <form method="POST" class="confirm-form">
+        {% csrf_token %}
+        <button type="submit" class="delete-button">Удалить</button>
+        <a href="{% url 'my_comments' %}" class="cancel-button">Отмена</a>
+    </form>
+</div>
+
+{% endblock %}

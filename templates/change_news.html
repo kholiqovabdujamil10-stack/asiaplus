@@ -1,0 +1,36 @@
+{% extends 'basic.html' %}
+
+{% block content %}
+
+<div class="form-container">
+    <h1 class="form-title">Изменить новость</h1>
+
+    <form method="POST" enctype="multipart/form-data" class="main-form">
+        {% csrf_token %}
+
+        <label class="form-label">Заголовок</label>
+        <input type="text" name="title" value="{{ news.title }}" class="form-input" required>
+
+        <label class="form-label">Описание</label>
+        <textarea name="caption" class="form-textarea" required>{{ news.caption }}</textarea>
+
+        <label class="form-label">Текст новости</label>
+        <textarea name="text" class="form-textarea large-textarea" required>{{ news.text }}</textarea>
+
+        <label class="form-label">Категория</label>
+        <select name="category" class="form-input">
+            {% for category in categories %}
+            <option value="{{ category.id }}" {% if category.id==news.category_id.id %}selected{% endif %}>
+                {{ category.name }}
+            </option>
+            {% endfor %}
+        </select>
+
+        <label class="form-label">Новое изображение</label>
+        <input type="file" name="image" class="form-input" accept="image/*">
+
+        <button type="submit" class="submit-button">Сохранить изменения</button>
+    </form>
+</div>
+
+{% endblock %}

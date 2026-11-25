@@ -1,0 +1,38 @@
+{% extends 'basic.html' %}
+
+{% block content %}
+
+<div class="dashboard-container">
+    <h1 class="page-title">Управление новостями</h1>
+
+    <form method="GET" class="search-form">
+        <input type="text" name="query" value="{{ data|default:'' }}" placeholder="Найти новость..."
+            class="search-input">
+        <button type="submit" class="search-button">Поиск</button>
+    </form>
+
+    <a href="{% url 'create_news' %}" class="add-button">+ Добавить новость</a>
+
+    <div class="manage-news-list">
+        {% for item in news %}
+        <div class="manage-news-card">
+            <img src="{{ item.image.url }}" alt="{{ item.title }}" class="manage-news-image">
+
+            <div class="manage-news-info">
+                <h2 class="manage-news-title">{{ item.title }}</h2>
+                <p class="manage-news-caption">{{ item.caption|truncatewords:15 }}</p>
+
+                <div class="manage-news-actions">
+                    <a href="{% url 'news_detail' item.id %}" class="view-button">Открыть</a>
+                    <a href="{% url 'change_news' item.id %}" class="edit-button">Изменить</a>
+                    <a href="{% url 'delete_news' item.id %}" class="delete-button">Удалить</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p class="empty-message">Новостей пока нет.</p>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
